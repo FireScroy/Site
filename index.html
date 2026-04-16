@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+    // Обработка якоря в URL
+    if (window.location.hash === '#secondPage') {
+        setTimeout(function() {
+            const element = document.getElementById('secondPage');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 300);
+    }
+</script>
 <!-- Хедер -->
 <div class="top-header" id="topHeader">
     <div class="logo-area" id="logoArea">
@@ -16,7 +27,7 @@
     <div class="nav-menu">
         <div class="nav-item" data-action="НАПИТКИ" id="navDrinks">НАПИТКИ</div>
         <div class="nav-item" data-action="ВКУСЫ" id="navTastes">ВКУСЫ</div>
-        <div class="nav-item" data-action="ДОСТАВКА">ДОСТАВКА</div>
+        <div class="nav-item" data-action="ДОСТАВКА" id="navDelivery">ДОСТАВКА</div>
         <div class="nav-item" data-action="МЕРЧ">МЕРЧ</div>
     </div>
     <div class="right-group">
@@ -105,5 +116,40 @@
 </section>
 
 <script src="script.js"></script>
+
+<!-- Обработка перехода с других страниц (скролл к нужному блоку) -->
+<script>
+    (function() {
+        const scrollTo = sessionStorage.getItem('scrollTo');
+        if (scrollTo === 'tastes') {
+            sessionStorage.removeItem('scrollTo');
+            // Ждём полной загрузки страницы
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const secondPage = document.getElementById('secondPage');
+                    if (secondPage) {
+                        secondPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        console.log('Скролл к вкусам выполнен');
+                    } else {
+                        console.log('Элемент secondPage не найден');
+                    }
+                }, 500);
+            });
+        } else if (scrollTo === 'drinks') {
+            sessionStorage.removeItem('scrollTo');
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const firstPage = document.getElementById('firstPage');
+                    if (firstPage) {
+                        firstPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        console.log('Скролл к напиткам выполнен');
+                    } else {
+                        console.log('Элемент firstPage не найден');
+                    }
+                }, 500);
+            });
+        }
+    })();
+</script>
 </body>
 </html>
