@@ -21,7 +21,7 @@
             <a href="#" class="nav-item">МЕРЧ</a>
         </nav>
         <div class="right-group">
-            <div class="cart-icon" onclick="alert('Корзина')">
+            <div class="cart-icon" onclick="location.href='cart.html'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#030405" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1.5"></circle>
                     <circle cx="20" cy="21" r="1.5"></circle>
@@ -31,12 +31,12 @@
         </div>
     </header>
 
+    <!-- ФОНОВЫЕ ИЗОБРАЖЕНИЯ ДЛЯ БЛОКОВ -->
+    <div class="delivery-bg"></div>
+    <div class="delivery-bg-overlay"></div>
+
     <!-- ПЕРВЫЙ БЛОК: КАК РАБОТАЕТ ДОСТАВКА + ГРОМ НАБОР -->
     <section class="delivery-info-section">
-        <!-- Фон для первого блока -->
-        <div class="delivery-bg"></div>
-        <div class="delivery-bg-overlay"></div>
-        
         <div class="delivery-grid">
             <div class="delivery-left">
                 <h1 class="delivery-title">КАК РАБОТАЕТ<br/>ДОСТАВКА</h1>
@@ -58,48 +58,47 @@
     </section>
 
     <!-- ВТОРОЙ БЛОК: ТАРИФЫ ДОСТАВКИ -->
-    <section class="tariffs-section">
-        <!-- Фон для второго блока -->
-        <div class="tariffs-bg"></div>
-        <div class="tariffs-bg-overlay"></div>
-        
-        <div class="tariffs-container">
-            <div class="tariffs-grid">
-                <div class="tariff-card" data-product="СТАНДАРТ">
-                    <div class="image-container">
-                        <img class="tariff-img" src="СТАНДАРТ.jpeg" alt="СТАНДАРТ">
-                        <div class="tariff-title-overlay">СТАНДАРТ</div>
-                        <div class="tariff-price-overlay">200р/банка</div>
-                        <div class="tariff-delivery-overlay">Доставка 3 дня</div>
-                        <button class="tariff-btn-overlay" onclick="alert('Выбран тариф СТАНДАРТ')">ВЫБРАТЬ</button>
-                    </div>
-                </div>
-                <div class="tariff-card" data-product="ПРЕМИУМ">
-                    <div class="image-container">
-                        <img class="tariff-img" src="ПРЕМИУМ.jpeg" alt="ПРЕМИУМ">
-                        <div class="tariff-title-overlay">ПРЕМИУМ</div>
-                        <div class="tariff-price-overlay">250р/банка</div>
-                        <div class="tariff-delivery-overlay">Доставка 1 день</div>
-                        <button class="tariff-btn-overlay" onclick="alert('Выбран тариф ПРЕМИУМ')">ВЫБРАТЬ</button>
-                    </div>
-                </div>
-                <div class="tariff-card" data-product="VIP ГРОМ">
-                    <div class="image-container">
-                        <img class="tariff-img" src="VIP ГРОМ.jpeg" alt="VIP ГРОМ">
-                        <div class="tariff-title-overlay">VIP ГРОМ</div>
-                        <div class="tariff-price-overlay">300р/банка</div>
-                        <div class="tariff-delivery-overlay">Доставка сегодня</div>
-                        <button class="tariff-btn-overlay" onclick="alert('Выбран тариф VIP ГРОМ')">ВЫБРАТЬ</button>
-                    </div>
+<section class="tariffs-section">
+    <div class="tariffs-bg"></div>
+    <div class="tariffs-bg-overlay"></div>
+    
+    <div class="tariffs-container">
+        <div class="tariffs-grid">
+            <div class="tariff-card" data-product="СТАНДАРТ">
+                <div class="image-container">
+                    <img class="tariff-img" src="СТАНДАРТ.jpeg" alt="СТАНДАРТ">
+                    <div class="tariff-title-overlay">СТАНДАРТ</div>
+                    <div class="tariff-price-overlay">200р/банка</div>
+                    <div class="tariff-delivery-overlay">Доставка 3 дня</div>
+                    <button class="tariff-btn-overlay" data-delivery-price="200">ВЫБРАТЬ</button>
                 </div>
             </div>
-            <div class="bottom-bar"></div>
-            <div class="contacts">
-                <span class="contacts-email" onclick="window.location.href='mailto:support@thndr.ru'">Контакты: support@thndr.ru</span>
-                <span class="contacts-social" onclick="window.open('https://t.me', '_blank')">@THNDR2026</span>
+            <div class="tariff-card" data-product="ПРЕМИУМ">
+                <div class="image-container">
+                    <img class="tariff-img" src="ПРЕМИУМ.jpeg" alt="ПРЕМИУМ">
+                    <div class="tariff-title-overlay">ПРЕМИУМ</div>
+                    <div class="tariff-price-overlay">250р/банка</div>
+                    <div class="tariff-delivery-overlay">Доставка 1 день</div>
+                    <button class="tariff-btn-overlay" data-delivery-price="250">ВЫБРАТЬ</button>
+                </div>
+            </div>
+            <div class="tariff-card" data-product="VIP ГРОМ">
+                <div class="image-container">
+                    <img class="tariff-img" src="VIP ГРОМ.jpeg" alt="VIP ГРОМ">
+                    <div class="tariff-title-overlay">VIP ГРОМ</div>
+                    <div class="tariff-price-overlay">300р/банка</div>
+                    <div class="tariff-delivery-overlay">Доставка сегодня</div>
+                    <button class="tariff-btn-overlay" data-delivery-price="300">ВЫБРАТЬ</button>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="bottom-bar"></div>
+        <div class="contacts">
+            <span class="contacts-email" onclick="window.location.href='mailto:support@thndr.ru'">Контакты: support@thndr.ru</span>
+            <span class="contacts-social" onclick="window.open('https://t.me', '_blank')">@THNDR2026</span>
+        </div>
+    </div>
+</section>
 </div>
 
 <script src="script.js"></script>

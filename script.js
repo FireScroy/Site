@@ -1,15 +1,14 @@
 // ========== ФУНКЦИИ ПРОКРУТКИ ==========
+
+// Скролл к началу страницы (первая страница целиком)
 function scrollToFirstPage() {
-    const firstPage = document.getElementById('firstPage');
-    if (firstPage) {
-        const targetPosition = firstPage.offsetTop;
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-    }
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
+// Скролл к блоку ВКУСЫ (вторая страница)
 function scrollToSecondPage() {
     const secondPage = document.getElementById('secondPage');
     if (secondPage) {
@@ -21,16 +20,25 @@ function scrollToSecondPage() {
     }
 }
 
+// Переход на страницу доставки
 function goToDeliveryPage() {
     window.location.href = 'delivery.html';
 }
 
+// Переход на страницу корзины
+function goToCartPage() {
+    window.location.href = 'cart.html';
+}
+
 // ========== ФУНКЦИИ ДЛЯ СТРАНИЦЫ ДОСТАВКИ ==========
+
+// Переход на главную с прокруткой к ВКУСАМ
 function goToTastesWithScroll() {
     sessionStorage.setItem('scrollTo', 'tastes');
     window.location.href = 'index.html';
 }
 
+// Переход на главную с прокруткой к началу (НАПИТКИ)
 function goToDrinksWithScroll() {
     sessionStorage.setItem('scrollTo', 'drinks');
     window.location.href = 'index.html';
@@ -48,19 +56,22 @@ function handleReturnScroll() {
         }
         sessionStorage.removeItem('scrollTo');
     } else if (scrollTo === 'drinks') {
-        const firstPage = document.getElementById('firstPage');
-        if (firstPage) {
-            setTimeout(() => {
-                firstPage.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
+        // Скролл к началу страницы (НЕ к фону)
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, 100);
         sessionStorage.removeItem('scrollTo');
     }
 }
 
 // ========== НАВИГАЦИЯ НА ГЛАВНОЙ СТРАНИЦЕ ==========
+
 if (document.getElementById('firstPage')) {
-    // Логотип
+    
+    // Логотип - скролл к началу
     const logoArea = document.getElementById('logoArea');
     if (logoArea) {
         logoArea.addEventListener('click', (e) => {
@@ -69,7 +80,7 @@ if (document.getElementById('firstPage')) {
         });
     }
 
-    // НАПИТКИ
+    // НАПИТКИ - скролл к началу
     const navDrinks = document.getElementById('navDrinks');
     if (navDrinks) {
         navDrinks.addEventListener('click', (e) => {
@@ -78,7 +89,7 @@ if (document.getElementById('firstPage')) {
         });
     }
 
-    // ВКУСЫ
+    // ВКУСЫ - скролл ко второму блоку
     const navTastes = document.getElementById('navTastes');
     if (navTastes) {
         navTastes.addEventListener('click', (e) => {
@@ -87,12 +98,21 @@ if (document.getElementById('firstPage')) {
         });
     }
 
-    // ДОСТАВКА
+    // ДОСТАВКА - переход на отдельную страницу
     const navDelivery = document.getElementById('navDelivery');
     if (navDelivery) {
         navDelivery.addEventListener('click', (e) => {
             e.preventDefault();
             goToDeliveryPage();
+        });
+    }
+
+    // Корзина - переход на страницу корзины
+    const cartIcon = document.getElementById('cartIcon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            goToCartPage();
         });
     }
 
@@ -105,16 +125,7 @@ if (document.getElementById('firstPage')) {
         });
     });
 
-    // Корзина
-    const cartIcon = document.getElementById('cartIcon');
-    if (cartIcon) {
-        cartIcon.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Корзина');
-        });
-    }
-
-    // Кнопка "ВЫБРАТЬ НАПИТОК"
+    // Кнопка "ВЫБРАТЬ НАПИТОК" - скролл ко второму блоку
     const chooseDrinkBtn = document.getElementById('chooseDrinkBtn');
     if (chooseDrinkBtn) {
         chooseDrinkBtn.addEventListener('click', (e) => {
@@ -132,7 +143,7 @@ if (document.getElementById('firstPage')) {
         });
     }
 
-    // Социальные кнопки на главной
+    // Социальные кнопки
     const socialVk = document.querySelector('.social-vk');
     if (socialVk) {
         socialVk.addEventListener('click', (e) => {
@@ -157,7 +168,7 @@ if (document.getElementById('firstPage')) {
         });
     }
 
-    // Карточки товаров на главной
+    // Карточки товаров (ВКУСЫ)
     const productCards = document.querySelectorAll('.product-card');
     let activeCard = null;
     
@@ -195,19 +206,32 @@ if (document.getElementById('firstPage')) {
         }
     });
     
-    const buyBtns = document.querySelectorAll('.buy-btn-overlay');
-    buyBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            alert('Товар добавлен в корзину');
+    // Кнопки "КУПИТЬ" на второй странице - добавление в корзину
+const buyBtns = document.querySelectorAll('.buy-btn-overlay');
+buyBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        // Получаем данные о товаре из атрибутов
+        const name = btn.getAttribute('data-name');
+        const price = parseInt(btn.getAttribute('data-price'));
+        
+        // Добавляем товар в корзину
+        addToCart({
+            name: name,
+            price: price,
+            quantity: 1
         });
     });
+});
 }
 
 // ========== НАВИГАЦИЯ НА СТРАНИЦЕ ДОСТАВКИ ==========
+
 if (document.querySelector('.delivery-left')) {
-    // Логотип - переход на главную (скролл к напиткам)
+    
+    // Логотип - переход на главную (скролл к началу)
     const logoArea = document.querySelector('.logo-area');
     if (logoArea) {
         logoArea.addEventListener('click', (e) => {
@@ -216,7 +240,7 @@ if (document.querySelector('.delivery-left')) {
         });
     }
 
-    // НАПИТКИ - переход на главную (скролл к напиткам)
+    // НАПИТКИ - переход на главную (скролл к началу)
     const navDrinks = document.querySelector('.nav-item[href="index.html"]');
     if (navDrinks && navDrinks.textContent === 'НАПИТКИ') {
         navDrinks.addEventListener('click', (e) => {
@@ -225,7 +249,7 @@ if (document.querySelector('.delivery-left')) {
         });
     }
 
-    // ВКУСЫ - переход на главную (скролл к вкусам)
+    // ВКУСЫ - переход на главную (скролл к ВКУСАМ)
     const tastesLink = document.getElementById('tastesLink');
     if (tastesLink) {
         tastesLink.addEventListener('click', (e) => {
@@ -243,16 +267,34 @@ if (document.querySelector('.delivery-left')) {
         });
     }
 
-    // Корзина
-    const cartIcon = document.querySelector('.cart-icon');
-    if (cartIcon) {
-        cartIcon.addEventListener('click', (e) => {
+    // Корзина на странице доставки
+    const cartIconDelivery = document.querySelector('.cart-icon');
+    if (cartIconDelivery) {
+        cartIconDelivery.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Корзина');
+            goToCartPage();
         });
     }
 
-    // Карточки тарифов на странице доставки
+    // ========== КНОПКИ ВЫБОРА ТАРИФОВ ==========
+const tariffBtns = document.querySelectorAll('.tariff-btn-overlay');
+tariffBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        // Получаем цену доставки из атрибута
+        const deliveryPrice = parseInt(btn.getAttribute('data-delivery-price'));
+        
+        if (deliveryPrice) {
+            // Сохраняем цену доставки
+            saveDeliveryPrice(deliveryPrice);
+            showNotification(`Доставка выбрана! Стоимость: ${deliveryPrice}р`);
+        }
+    });
+});
+
+    // Карточки тарифов (для вылетающего текста)
     const tariffCards = document.querySelectorAll('.tariff-card');
     let activeTariffCard = null;
     
@@ -292,7 +334,9 @@ if (document.querySelector('.delivery-left')) {
 }
 
 // ========== АНИМАЦИЯ ПРИ ЗАГРУЗКЕ ==========
+
 document.addEventListener('DOMContentLoaded', () => {
+    
     // Анимация для главной страницы
     const leftContent = document.querySelector('.first-page .left-content');
     const rightContent = document.querySelector('.first-page .right-content');
@@ -341,6 +385,105 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 200);
     }
     
-    // Обработка возврата на главную страницу с параметром скролла
+    // Обработка возврата на главную страницу
     handleReturnScroll();
 });
+// ========== КОРЗИНА (РАБОТА С LOCALSTORAGE) ==========
+
+const CART_STORAGE_KEY = 'thndr_cart';
+const DELIVERY_PRICE_KEY = 'thndr_delivery_price';
+
+// Получить корзину
+function getCart() {
+    const cart = localStorage.getItem(CART_STORAGE_KEY);
+    return cart ? JSON.parse(cart) : [];
+}
+
+// Сохранить корзину
+function saveCart(cart) {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
+
+// Получить цену доставки
+function getDeliveryPrice() {
+    const price = localStorage.getItem(DELIVERY_PRICE_KEY);
+    return price ? parseInt(price) : 200; // по умолчанию 200р
+}
+
+// Сохранить цену доставки
+function saveDeliveryPrice(price) {
+    localStorage.setItem(DELIVERY_PRICE_KEY, price);
+}
+
+// Добавить товар в корзину
+function addToCart(product) {
+    if (!product.name || product.name === 'null' || !product.price) {
+        console.error('Ошибка: некорректный товар', product);
+        return;
+    }
+    
+    const cart = getCart();
+    const existingItem = cart.find(item => item.name === product.name);
+    
+    if (existingItem) {
+        existingItem.quantity += product.quantity;
+    } else {
+        cart.push({
+            id: Date.now() + product.name,
+            name: product.name,
+            price: product.price,
+            quantity: product.quantity,
+            type: 'drink'
+        });
+    }
+    
+    saveCart(cart);
+    showNotification(`${product.name} добавлен в корзину!`);
+    
+    return cart;
+}
+
+// Показать уведомление
+function showNotification(message) {
+    // Создаём уведомление
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #F9B121;
+        color: #030405;
+        padding: 12px 24px;
+        border-radius: 40px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        animation: fadeInOut 2s ease forwards;
+    `;
+    
+    // Добавляем стили анимации, если их нет
+    if (!document.querySelector('#notification-styles')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                100% { opacity: 0; transform: translateX(-50%) translateY(-20px); visibility: hidden; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(notification);
+    
+    // Удаляем уведомление через 2 секунды
+    setTimeout(() => {
+        notification.remove();
+    }, 2000);
+}
