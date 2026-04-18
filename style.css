@@ -310,6 +310,7 @@ body {
     padding-top: 150px;
     margin-bottom: 50px;
 }
+
 /* FLEXBOX для карточек товаров */
 .products-flex {
     display: flex;
@@ -317,7 +318,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;  /* ← ИЗМЕНИТЕ ЭТО ЗНАЧЕНИЕ ДЛЯ ОТСТУПОВ МЕЖДУ КАРТОЧКАМИ (десктоп) */
+    gap: 20px;
     z-index: 2;
     position: relative;
     padding: 20px;
@@ -326,13 +327,6 @@ body {
 }
 
 .product-card {
-    /* 
-       width: clamp(МИНИМУМ, ПРЕДПОЧТИТЕЛЬНЫЙ, МАКСИМУМ)
-       - МИНИМУМ: 250px (на узких экранах)
-       - ПРЕДПОЧТИТЕЛЬНЫЙ: 25vw (25% от ширины окна)
-       - МАКСИМУМ: 325px (на широких экранах)
-       ИЗМЕНЯЙТЕ ЭТИ ЗНАЧЕНИЯ ДЛЯ МАСШТАБА КАРТОЧЕК
-    */
     width: clamp(250px, 25vw, 325px);
     height: auto;
     aspect-ratio: 325 / 330;
@@ -365,9 +359,12 @@ body {
     transform: scale(1.05);
 }
 
+/* ========== ВЫЛЕТАЮЩИЕ ЭЛЕМЕНТЫ НА КАРТОЧКАХ ========== */
+
+/* Название товара */
 .product-title-overlay {
     position: absolute;
-    bottom: 20%;
+    bottom: 25%;
     left: 0;
     right: 0;
     text-align: center;
@@ -383,9 +380,29 @@ body {
     pointer-events: none;
 }
 
+/* Цена товара (под названием) */
+.product-price-overlay {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #F9B121;
+    font-size: clamp(20px, 3vw, 32px);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    z-index: 3;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+
+/* Кнопка покупки */
 .buy-btn-overlay {
     position: absolute;
-    bottom: 8%;
+    bottom: 5%;
     left: 0;
     right: 0;
     text-align: center;
@@ -396,16 +413,15 @@ body {
     cursor: pointer;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
     z-index: 3;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    background: transparent;
+    border: none;
 }
 
-.product-card:hover .product-title-overlay {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+.product-card:hover .product-title-overlay,
+.product-card:hover .product-price-overlay,
 .product-card:hover .buy-btn-overlay {
     opacity: 1;
     transform: translateY(0);
@@ -468,7 +484,6 @@ body {
 
 /* ========== АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ (до 1024px) ========== */
 @media (max-width: 1024px) {
-    /* Хедер */
     .top-header {
         flex-direction: column;
         height: auto;
@@ -509,7 +524,6 @@ body {
         transform: scale(1.7);
     }
     
-    /* Первая страница */
     .main-content {
         flex-direction: column;
     }
@@ -558,11 +572,10 @@ body {
         margin-top: 0%;
     }
     
-    /* Вторая страница - ИСПРАВЛЕНО */
     .second-page-container {
         min-height: 100vh;
         position: relative;
-        padding-bottom: 105px; /* место под подвал */
+        padding-bottom: 105px;
     }
     
     .second-page-title {
@@ -575,7 +588,6 @@ body {
         gap: 20px;
         padding: 20px;
         display: flex;
-        grid-template-columns: repeat(2, 1fr);
         max-width: 600px;
         margin: 0 auto;
         transform: none;
@@ -588,7 +600,6 @@ body {
         position: relative;
         overflow: visible;
         aspect-ratio: 325 / 330;
-        
     }
     
     .image-container {
@@ -598,46 +609,18 @@ body {
     }
     
     .product-title-overlay {
-        position: absolute;
-        bottom: 100px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: white;
+        bottom: 25%;
         font-size: 60px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 3;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        pointer-events: none;
-        background: transparent;
-        padding: 0;
-        border-radius: 0;
+    }
+    
+    .product-price-overlay {
+        bottom: 17%;
+        font-size: 45px;
     }
     
     .buy-btn-overlay {
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: #F9B121;
-        font-size: 60px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        cursor: pointer;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
-        z-index: 3;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        background: transparent;
-        padding: 0;
-        border-radius: 0;
-        pointer-events: auto;
+        bottom: 10%;
+        font-size: 45px;
     }
     
     .product-card.active .product-title-overlay,
@@ -651,7 +634,6 @@ body {
         transition: filter 0.2s ease;
     }
     
-    /* Подвал - закреплён внизу */
     .bottom-bar {
         position: absolute;
         bottom: 0;
@@ -680,9 +662,9 @@ body {
         font-size: 30px;
     }
 }
+
 /* ========== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (до 768px) ========== */
 @media (max-width: 768px) {
-    /* Хедер */
     .top-header {
         flex-direction: column;
         height: auto;
@@ -723,7 +705,6 @@ body {
         transform: scale(1);
     }
     
-    /* Первая страница */
     .main-content {
         flex-direction: column;
     }
@@ -771,8 +752,7 @@ body {
         transform: translateX(0);
         margin-top: -20%;
     }
-
-    /* Вторая страница - FLEX */
+    
     .second-page-title {
         padding-top: 50px;
         font-size: 32px;
@@ -802,7 +782,6 @@ body {
         height: 100%;
     }
     
-    /* Плавное изменение параметров от 480px до 768px */
     @media (min-width: 481px) {
         .products-flex {
             gap: calc(12px + (20 - 12) * ((100vw - 481px) / (768 - 481)));
@@ -822,13 +801,17 @@ body {
             bottom: calc(45px + (55 - 45) * ((100vw - 481px) / (768 - 481)));
         }
         
+        .product-price-overlay {
+            font-size: calc(14px + (18 - 14) * ((100vw - 481px) / (768 - 481)));
+            bottom: calc(12px + (15 - 12) * ((100vw - 481px) / (768 - 481)));
+        }
+        
         .buy-btn-overlay {
             font-size: calc(12px + (16 - 12) * ((100vw - 481px) / (768 - 481)));
             bottom: calc(12px + (15 - 12) * ((100vw - 481px) / (768 - 481)));
         }
     }
     
-    /* Фиксированные значения для ширины 480px и меньше */
     @media (max-width: 480px) {
         .products-flex {
             gap: 12px;
@@ -844,12 +827,17 @@ body {
         
         .product-title-overlay {
             font-size: 14px;
-            bottom: 45px;
+            bottom: 25%;
+        }
+        
+        .product-price-overlay {
+            font-size: 14px;
+            bottom: 15%;
         }
         
         .buy-btn-overlay {
             font-size: 12px;
-            bottom: 12px;
+            bottom: 8%;
         }
     }
     
@@ -857,10 +845,12 @@ body {
         position: absolute;
         left: 0;
         right: 0;
+        bottom: 70px;
         text-align: center;
         color: white;
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
+        font-size: 30px;
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.3s ease, transform 0.3s ease;
@@ -872,18 +862,41 @@ body {
         border-radius: 0;
     }
     
-    .buy-btn-overlay {
+    .product-price-overlay {
         position: absolute;
         left: 0;
         right: 0;
+        bottom: 45px;
         text-align: center;
         color: #F9B121;
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
-        cursor: pointer;
+        font-size: 25px;
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+        z-index: 3;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        pointer-events: none;
+    }
+    
+    .buy-btn-overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 15px;
+        text-align: center;
+        color: #F9B121;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 25px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
         z-index: 3;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         background: transparent;
@@ -893,6 +906,7 @@ body {
     }
     
     .product-card.active .product-title-overlay,
+    .product-card.active .product-price-overlay,
     .product-card.active .buy-btn-overlay {
         opacity: 1;
         transform: translateY(0);
@@ -933,9 +947,9 @@ body {
         font-size: 20px;
     }
 }
+
 /* ========== АДАПТИВНОСТЬ ДЛЯ МАЛЕНЬКИХ МОБИЛЬНЫХ (до 480px) ========== */
 @media (max-width: 480px) {
-    /* Хедер */
     .logo-img {
         width: 60px;
         height: 60px;
@@ -951,7 +965,6 @@ body {
         transform: scale(1.2);
     }
     
-    /* Первая страница */
     .main-title {
         font-size: 60px;
     }
@@ -977,7 +990,6 @@ body {
         transform: scale(1.5);
     }
     
-    /* Вторая страница - КАРТОЧКИ В 1 СТОЛБИК */
     .second-page-container {
         padding-bottom: 80px;
     }
@@ -1030,7 +1042,7 @@ body {
     
     .product-title-overlay {
         position: absolute;
-        bottom: 55px;
+        bottom: 70px;
         left: 0;
         right: 0;
         text-align: center;
@@ -1049,6 +1061,27 @@ body {
         border-radius: 0;
     }
     
+    .product-price-overlay {
+        position: absolute;
+        bottom: 45px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: #F9B121;
+        font-size: 24px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+        z-index: 3;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        pointer-events: none;
+    }
+    
     .buy-btn-overlay {
         position: absolute;
         bottom: 15px;
@@ -1056,13 +1089,13 @@ body {
         right: 0;
         text-align: center;
         color: #F9B121;
-        font-size: 30px;
+        font-size: 24px;
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
         cursor: pointer;
         opacity: 0;
         transform: translateY(30px);
-        transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+        transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
         z-index: 3;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         background: transparent;
@@ -1072,10 +1105,12 @@ body {
     }
     
     .product-card.active .product-title-overlay,
+    .product-card.active .product-price-overlay,
     .product-card.active .buy-btn-overlay {
         opacity: 1;
         transform: translateY(0);
     }
+    
     .bottom-bar {
         height: 45px;
     }
@@ -1100,29 +1135,15 @@ body {
         right: 10px;
     }
 }
+
 /* ============================================
    АДАПТИВНОСТЬ ДЛЯ ОЧЕНЬ БОЛЬШИХ ЭКРАНОВ (1920px+)
    ============================================ */
 @media (min-width: 1920px) {
-    /* 
-       📌 ДЛЯ БОЛЬШИХ ЭКРАНОВ - ИЗМЕНЯЙТЕ ЗДЕСЬ:
-       - max-width: 1600px = максимальная ширина контейнера
-    */
     .products-flex {
         max-width: 1600px;
     }
-    .cart-icon {
-    position: relative;
-    width: 56px;
-    height: 56px;
-    cursor: pointer;
-    transition: filter 0.2s ease; 
-}
     
-    /* 
-       📌 ДЛЯ БОЛЬШИХ ЭКРАНОВ - ИЗМЕНЯЙТЕ ЗДЕСЬ:
-       - width: 325px = фиксированная ширина карточки
-    */
     .product-card {
         width: 325px;
     }

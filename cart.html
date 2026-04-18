@@ -89,6 +89,7 @@
 <script>
     // ========== КОРЗИНА (РАБОТА С LOCALSTORAGE) ==========
     const CART_STORAGE_KEY = 'thndr_cart';
+    const DELIVERY_PRICE_KEY = 'thndr_delivery_price';
     
     function getCart() {
         const cart = localStorage.getItem(CART_STORAGE_KEY);
@@ -97,6 +98,11 @@
     
     function saveCart(cart) {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    }
+    
+    function getDeliveryPrice() {
+        const price = localStorage.getItem(DELIVERY_PRICE_KEY);
+        return price ? parseInt(price) : 200;
     }
     
     function removeFromCart(productId) {
@@ -121,14 +127,16 @@
         renderCart();
     }
     
-    function getCartTotal() {
-        const cart = getCart();
-        return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    }
-    
     // Рендер корзины
     function renderCart() {
-        const cart = getCart();
+        let cart = getCart();
+        
+        // Фильтруем товары с пустыми названиями
+        cart = cart.filter(item => item.name && item.name !== 'null' && item.name.trim() !== '');
+        
+        // Сохраняем отфильтрованную корзину
+        saveCart(cart);
+        
         const container = document.getElementById('cart-items-container');
         const emptyMessage = document.getElementById('empty-cart-message');
         
@@ -143,49 +151,66 @@
         
         emptyMessage.style.display = 'none';
         
-        container.innerHTML = cart.map(item => `
-            <div class="cart-item" data-id="${item.id}" data-price="${item.price}">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-quantity">
-                    <button class="quantity-btn minus" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
-                    <span class="quantity-value">${item.quantity}</span>
-                    <button class="quantity-btn plus" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+        container.innerHTML = cart.map(item => {
+            // Формируем строку с ценой и скидкой
+            let priceHtml = `<span class="price-value">${item.price * item.quantity}р</span>`;
+            if (item.discount && item.discount > 0) {
+                const originalTotal = (item.originalPrice || item.price) * item.quantity;
+                priceHtml = `<span class="price-value"><span style="text-decoration: line-through; opacity: 0.6;">${originalTotal}р</span> ${item.price * item.quantity}р</span>`;
+            }
+            
+            return `
+                <div class="cart-item" data-id="${item.id}" data-price="${item.price}">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn minus" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
+                        <span class="quantity-value">${item.quantity}</span>
+                        <button class="quantity-btn plus" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                    </div>
+                    <div class="cart-item-price">
+                        ${priceHtml}
+                        <button class="cart-item-delete" onclick="removeFromCart('${item.id}')">удалить</button>
+                    </div>
                 </div>
-                <div class="cart-item-price">
-                    <span class="price-value">${item.price * item.quantity}р</span>
-                    <button class="cart-item-delete" onclick="removeFromCart('${item.id}')">удалить</button>
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
         
         updateTotals();
     }
     
-    // В cart.html обновите функцию updateTotals
-function updateTotals() {
-    let total = getCartTotal();
-    const delivery = getDeliveryPrice(); // получаем сохранённую цену доставки
-    const finalTotal = total + delivery;
+    function updateTotals() {
+        let total = 0;
+        const cart = getCart();
+        
+        // Считаем сумму всех товаров
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+        });
+        
+        const delivery = getDeliveryPrice();
+        const finalTotal = total + delivery;
+        
+        document.getElementById('goodsTotal').innerText = total + 'р';
+        document.getElementById('deliveryPrice').innerText = delivery + 'р';
+        document.getElementById('finalTotal').innerText = finalTotal + 'р';
+    }
     
-    document.getElementById('goodsTotal').innerText = total + 'р';
-    document.getElementById('deliveryPrice').innerText = delivery + 'р';
-    document.getElementById('finalTotal').innerText = finalTotal + 'р';
-}
-
-// Функция получения цены доставки из localStorage
-function getDeliveryPrice() {
-    const price = localStorage.getItem('thndr_delivery_price');
-    return price ? parseInt(price) : 200;
-}
-
-// При загрузке страницы корзины также обновляем отображение цены доставки
-document.addEventListener('DOMContentLoaded', () => {
-    renderCart();
-    // Обновляем отображение цены доставки
-    const deliveryPrice = getDeliveryPrice();
-    document.getElementById('deliveryPrice').innerText = deliveryPrice + 'р';
-    updateTotals();
-});
+    function checkout() {
+        const cart = getCart();
+        if (cart.length === 0) {
+            alert('Корзина пуста! Добавьте товары.');
+            return;
+        }
+        const finalTotal = document.getElementById('finalTotal').innerText;
+        alert('Спасибо за заказ! Сумма к оплате: ' + finalTotal);
+        localStorage.removeItem(CART_STORAGE_KEY);
+        renderCart();
+    }
+    
+    // При загрузке страницы корзины
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+    });
 </script>
 
 <!-- Bootstrap JS -->

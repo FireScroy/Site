@@ -275,6 +275,34 @@ if (document.querySelector('.delivery-left')) {
             goToCartPage();
         });
     }
+    // ========== КНОПКА "ОФОРМИТЬ НАБОР" ==========
+    const orderSetBtn = document.querySelector('.card-btn');
+if (orderSetBtn) {
+    orderSetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Получаем данные о наборе из атрибутов
+        const name = orderSetBtn.getAttribute('data-name');
+        const price = parseInt(orderSetBtn.getAttribute('data-price'));
+        const originalPrice = parseInt(orderSetBtn.getAttribute('data-original-price'));
+        const discount = parseInt(orderSetBtn.getAttribute('data-discount'));
+        
+        // Добавляем набор в корзину
+        addToCart({
+            name: name,
+            price: price,
+            quantity: 1,
+            originalPrice: originalPrice,
+            discount: discount,
+            type: 'set'
+        });
+        
+        // Показываем уведомление о скидке
+        showNotification(`${name} добавлен в корзину! Скидка ${discount}%`);
+    });
+}
+
 
     // ========== КНОПКИ ВЫБОРА ТАРИФОВ ==========
 const tariffBtns = document.querySelectorAll('.tariff-btn-overlay');
@@ -415,7 +443,6 @@ function saveDeliveryPrice(price) {
     localStorage.setItem(DELIVERY_PRICE_KEY, price);
 }
 
-// Добавить товар в корзину
 function addToCart(product) {
     if (!product.name || product.name === 'null' || !product.price) {
         console.error('Ошибка: некорректный товар', product);
@@ -433,12 +460,20 @@ function addToCart(product) {
             name: product.name,
             price: product.price,
             quantity: product.quantity,
-            type: 'drink'
+            originalPrice: product.originalPrice || product.price,
+            discount: product.discount || 0,
+            type: product.type || 'drink'
         });
     }
     
     saveCart(cart);
-    showNotification(`${product.name} добавлен в корзину!`);
+    
+    // Показываем уведомление
+    if (product.discount) {
+        showNotification(`${product.name} добавлен в корзину! Скидка ${product.discount}%`);
+    } else {
+        showNotification(`${product.name} добавлен в корзину!`);
+    }
     
     return cart;
 }
