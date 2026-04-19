@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: #030405;
+    background: transparent;
     overflow-x: hidden;
 }
 
@@ -95,7 +95,7 @@ body {
     cursor: pointer;
     transition: filter 0.2s ease;
     margin-left: 40px;
-    transform:scale(1.8)
+    transform: scale(1.8) translateX(-46px);
 }
 
 .cart-icon:hover svg {
@@ -107,10 +107,34 @@ body {
     height: 100%;
     transition: filter 0.2s ease;
 }
+/* ========== ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ ========== */
+.cart-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ЗДЕСЬ МЕНЯЙТЕ ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ */
+    background-image: url('фон1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
 
-/* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+.cart-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 4, 5, 0.7);
+    z-index: -1;
+}
+
+/* ========== ПЕРВЫЙ БЛОК: КОРЗИНА ========== */
 .cart-section {
-    background: #030405;
+    background: transparent;
     min-height: calc(100vh - 107px);
     display: flex;
     align-items: center;
@@ -200,7 +224,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: -50px;
+    gap: 8px;
     padding-top: 0;
     margin-left: -40px;
 }
@@ -336,7 +360,7 @@ body {
     border-radius: 10px;
     border: 3px solid black;
     background: transparent;
-    font-size: 48px;
+    font-size: 33px;
     font-weight: 500;
     color: black;
     cursor: pointer;
@@ -352,10 +376,12 @@ body {
 /* Bootstrap Grid отступы */
 .row-custom {
     display: flex;
-    gap: 30px;
+    gap: 80px;
     justify-content: center;
     align-items: center;
 }
+
+
 /* Стили для пустой корзины */
 #empty-cart-message {
     text-align: center;
@@ -365,11 +391,126 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-@media (max-width: 768px) {
-    #empty-cart-message {
-        font-size: 18px;
-        padding: 30px 15px;
-    }
+/* ========== ВТОРОЙ БЛОК: ДАННЫЕ ДЛЯ ДОСТАВКИ ========== */
+
+.delivery-data-section {
+    background: transparent;
+    min-height: 100vh;
+    position: relative;
+    padding: 50px 0 300px 0;
+}
+
+.delivery-data-card {
+    background: #F9B121;
+    border-radius: 20px;
+    padding: 50px 40px;
+    height: 94%;
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.delivery-data-title {
+    text-align: center;
+    color: black;
+    font-size: 60px;
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+/* Стили формы */
+.form-label {
+    font-size: 30px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: -10px;
+}
+
+.form-control {
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 0;
+    font-size: 30px;
+    padding: 10px 0;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-control:focus {
+    background: transparent;
+    border-bottom: 3px solid black;
+    box-shadow: none;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 32px;
+}
+
+.submit-order-btn {
+    width: 510px;
+    height: 80px;
+    background: transparent;
+    border-radius: 8px;
+    border: 3px solid black;
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.submit-order-btn:hover {
+    background: black;
+    color: #F9B121;
+}
+
+/* Социальные кнопки для второго блока */
+.delivery-data-section .bottom-bar {
+    width: 100%;
+    height: 105px;
+    background: #F9B121;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.delivery-data-section .social-vk {
+    position: absolute;
+    left: 291px;
+    bottom: 25px;
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.delivery-data-section .social-telegram {
+    position: absolute;
+    left: 396px;
+    bottom: 25px;
+    color: black;
+    font-size: 46px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.delivery-data-section .social-email {
+    position: absolute;
+    right: 310px;
+    bottom: 25px;
+    color: black;
+    font-size: 45px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
 }
 
 /* ========== АДАПТИВНОСТЬ ========== */
@@ -438,6 +579,37 @@ body {
         flex-direction: column;
         gap: 30px;
     }
+    
+    /* Адаптивность второго блока */
+    .delivery-data-card {
+        max-width: 90%;
+        padding: 40px 30px;
+    }
+    .delivery-data-title {
+        font-size: 54px;
+        margin-bottom: 60px;
+    }
+    .form-label {
+        font-size: 36px;
+    }
+    .form-control {
+        font-size: 32px;
+    }
+    .submit-order-btn {
+        width: 400px;
+        height: 70px;
+        font-size: 36px;
+    }
+    .delivery-data-section .social-vk {
+        left: 50px;
+    }
+    .delivery-data-section .social-telegram {
+        left: 150px;
+    }
+    .delivery-data-section .social-email {
+        right: 50px;
+        font-size: 36px;
+    }
 }
 
 /* Планшеты (до 1024px) */
@@ -477,6 +649,44 @@ body {
     .cart-icon {
         width: 45px;
         height: 45px;
+    }
+    
+    /* Адаптивность второго блока */
+    .delivery-data-title {
+        font-size: 44px;
+        margin-bottom: 40px;
+    }
+    .form-label {
+        font-size: 28px;
+    }
+    .form-control {
+        font-size: 24px;
+    }
+    .submit-order-btn {
+        width: 320px;
+        height: 60px;
+        font-size: 28px;
+    }
+    .delivery-data-section .social-vk,
+    .delivery-data-section .social-telegram,
+    .delivery-data-section .social-email {
+        font-size: 28px;
+    }
+    .delivery-data-section .social-vk {
+        left: 20px;
+        bottom: 20px;
+    }
+    .delivery-data-section .social-telegram {
+        left: 100px;
+        bottom: 20px;
+    }
+    .delivery-data-section .social-email {
+        right: 20px;
+        bottom: 20px;
+        font-size: 20px;
+    }
+    .delivery-data-section .bottom-bar {
+        height: 80px;
     }
 }
 
@@ -560,6 +770,25 @@ body {
         height: 50px;
         font-size: 20px;
     }
+    
+    /* Адаптивность второго блока */
+    .delivery-data-title {
+        font-size: 32px;
+    }
+    .form-label {
+        font-size: 22px;
+    }
+    .form-control {
+        font-size: 18px;
+    }
+    .form-control::placeholder {
+        font-size: 16px;
+    }
+    .submit-order-btn {
+        width: 260px;
+        height: 50px;
+        font-size: 22px;
+    }
 }
 
 /* Маленькие мобильные (до 480px) */
@@ -618,5 +847,40 @@ body {
         width: 180px;
         height: 45px;
         font-size: 16px;
+    }
+    
+    /* Адаптивность второго блока */
+    .delivery-data-title {
+        font-size: 24px;
+    }
+    .form-label {
+        font-size: 18px;
+    }
+    .form-control {
+        font-size: 14px;
+    }
+    .submit-order-btn {
+        width: 200px;
+        height: 45px;
+        font-size: 18px;
+    }
+    .delivery-data-section .social-vk,
+    .delivery-data-section .social-telegram,
+    .delivery-data-section .social-email {
+        font-size: 16px;
+    }
+    .delivery-data-section .social-telegram {
+        left: 70px;
+    }
+    .delivery-data-section .social-email {
+        font-size: 12px;
+    }
+}
+
+/* Стили для пустой корзины на мобильных */
+@media (max-width: 768px) {
+    #empty-cart-message {
+        font-size: 18px;
+        padding: 30px 15px;
     }
 }

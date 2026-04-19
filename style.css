@@ -112,7 +112,8 @@ body {
     width: 56px;
     height: 56px;
     cursor: pointer;
-    transition: filter 0.2s ease; 
+    transition: filter 0.2s ease;
+    transform: translateX(-98px);
 }
 
 .cart-icon:hover svg {
@@ -467,12 +468,12 @@ body {
 }
 
 .social-telegram {
-    left: 23%;
+    left: 396px;
     bottom: 30px;
 }
 
 .social-email {
-    right: 14%;
+    right: 275px;
     bottom: 30px;
 }
 

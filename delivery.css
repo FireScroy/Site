@@ -10,101 +10,35 @@ html, body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: #030405;
-}
-/* ========== ФОНЫ ДЛЯ ПЕРВОГО БЛОКА ========== */
-.delivery-info-section {
-    position: relative;
-    overflow: hidden;
-}
-
-.delivery-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* ЗДЕСЬ МЕНЯЙТЕ ФОН ДЛЯ ПЕРВОГО БЛОКА */
+    /* ===== ФОН РАБОТАЕТ ЗДЕСЬ ===== */
     background-image: url('фон1.png');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    z-index: 0;
+    position: relative;
 }
 
-.delivery-bg-overlay {
-    position: absolute;
+/* Затемнение через псевдоэлемент */
+body::before {
+    content: '';
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(3, 4, 5, 0.7);
-    z-index: 1;
+    z-index: -1;
+    pointer-events: none;
 }
 
-.delivery-info-section .delivery-grid {
-    position: relative;
-    z-index: 2;
-}
-
-/* ========== ФОНЫ ДЛЯ ВТОРОГО БЛОКА ========== */
-.tariffs-section {
-    position: relative;
-    min-height: 100vh;
-}
-
-.tariffs-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* ЗДЕСЬ МЕНЯЙТЕ ФОН ДЛЯ ВТОРОГО БЛОКА */
-    background-image: url('фон2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-}
-
-.tariffs-bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(3, 4, 5, 0.7);
-    z-index: 1;
-}
-
-.tariffs-section .tariffs-container {
-    position: relative;
-    z-index: 2;
-    min-height: 100vh;
-}
-
-/* Убираем фоновый цвет у контейнера, если он был */
-.tariffs-container {
-    background: transparent !important;
-}
-
-.tariffs-grid {
-    background: transparent;
-}
-
-/* Также убедитесь, что у tariffs-grid нет фона, который перекрывает */
-.tariffs-grid {
-    position: relative;
-    z-index: 2;
-    background: transparent; /* Убираем возможный фон */
-}
 /* ========== СТРАНИЦА ========== */
 .page {
     width: 100%;
     max-width: 1920px;
     margin: 0 auto;
     position: relative;
-    background: white;
+    background: transparent;
     min-height: 100vh;
 }
 
@@ -141,7 +75,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 150px;
+    margin-left: 205px;
 }
 
 .nav-item {
@@ -204,10 +138,9 @@ body {
     transition: filter 0.2s ease;
 }
 
-/* ========== ПЕРВЫЙ БЛОК: ДОСТАВКА (CSS GRID) ========== */
+/* ========== ПЕРВЫЙ БЛОК: ДОСТАВКА ========== */
 .delivery-info-section {
     width: 100%;
-    background: #030405;
     position: relative;
     padding: 136px 0 0 0;
 }
@@ -220,7 +153,6 @@ body {
     align-items: start;
 }
 
-/* Левая колонка */
 .delivery-left {
     background: #F9B121;
     border-radius: 41px;
@@ -256,7 +188,6 @@ body {
     margin-bottom: 0;
 }
 
-/* Правая колонка */
 .delivery-right {
     width: 550px;
     height: 597px;
@@ -311,10 +242,9 @@ body {
     color: #F9B121;
 }
 
-/* ========== ВТОРОЙ БЛОК: ТАРИФЫ (CSS GRID) ========== */
+/* ========== ВТОРОЙ БЛОК: ТАРИФЫ ========== */
 .tariffs-section {
     width: 100%;
-    background: #030405;
     position: relative;
 }
 
@@ -322,7 +252,7 @@ body {
     max-width: 1920px;
     margin: 0 auto;
     position: relative;
-    background: #030405;
+    background: transparent;
 }
 
 .tariffs-grid {
@@ -335,7 +265,6 @@ body {
     padding-bottom: 400px;
 }
 
-/* Карточка тарифа */
 .tariff-card {
     width: 440px;
     height: 440px;
@@ -370,7 +299,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Вылетающие элементы поверх изображения */
 .tariff-title-overlay {
     position: absolute;
     top: 140px;
@@ -510,6 +438,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: opacity 0.2s ease;
+    margin-right: 22px;
 }
 
 .contacts-email:hover,
@@ -518,8 +447,6 @@ body {
 }
 
 /* ========== АДАПТИВНОСТЬ ========== */
-
-/* Планшеты (до 1400px) */
 @media (max-width: 1400px) {
     .top-header {
         padding: 0 40px;
@@ -621,7 +548,6 @@ body {
     }
 }
 
-/* Планшеты (до 1024px) */
 @media (max-width: 1024px) {
     .top-header {
         flex-direction: column;
@@ -766,7 +692,6 @@ body {
     }
 }
 
-/* Мобильные устройства (до 768px) */
 @media (max-width: 768px) {
     .logo-img {
         width: 55px;
@@ -775,8 +700,6 @@ body {
     
     .nav-item {
         font-size: 20px;
-        width: auto !important;
-        margin-right: 0 !important;
     }
     
     .cart-icon {
@@ -861,7 +784,6 @@ body {
     }
 }
 
-/* Маленькие мобильные (до 480px) */
 @media (max-width: 480px) {
     .logo-img {
         width: 60px;
