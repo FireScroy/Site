@@ -116,7 +116,7 @@ body {
     width: 100%;
     height: 100%;
     /* ЗДЕСЬ МЕНЯЙТЕ ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ */
-    background-image: url('webp/фон1.webp');
+    background-image: url('../webp/фон1.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
