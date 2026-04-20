@@ -115,16 +115,6 @@ if (document.getElementById('firstPage')) {
             goToCartPage();
         });
     }
-
-    // Остальные пункты меню (МЕРЧ)
-    const navOther = document.querySelectorAll('.nav-item:not(#navDrinks):not(#navTastes):not(#navDelivery)');
-    navOther.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert(item.getAttribute('data-action'));
-        });
-    });
-
     // Кнопка "ВЫБРАТЬ НАПИТОК" - скролл ко второму блоку
     const chooseDrinkBtn = document.getElementById('chooseDrinkBtn');
     if (chooseDrinkBtn) {
@@ -134,14 +124,6 @@ if (document.getElementById('firstPage')) {
         });
     }
 
-    // Изображение продукта
-    const productImage = document.getElementById('productImage');
-    if (productImage) {
-        productImage.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Изображение продукта');
-        });
-    }
 
     // Социальные кнопки
     const socialVk = document.querySelector('.social-vk');

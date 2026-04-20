@@ -559,6 +559,8 @@ body::before {
     .logo-img {
         width: 100px;
         height: 100px;
+        margin-bottom: -5.5px;
+        margin-top: -5px;
     }
     
     .nav-menu {
@@ -696,6 +698,7 @@ body::before {
     .logo-img {
         width: 55px;
         height: 55px;
+        
     }
     
     .nav-item {
@@ -788,6 +791,8 @@ body::before {
     .logo-img {
         width: 60px;
         height: 60px;
+        margin-top: -5px;
+        margin-bottom: 5px;
     }
     
     .nav-item {
@@ -798,7 +803,7 @@ body::before {
     .cart-icon {
         width: 32px;
         height: 32px;
-        transform: scale(1.2);
+        transform: scale(1.2) translateX(21px) translateY(-1px);
         margin-top: 18px;
         margin-right: 44px;
     }
