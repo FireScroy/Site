@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>THNDR — Энергия без тормозов | Flexbox версия</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Хедер -->
+<div class="top-header" id="topHeader">
+    <div class="logo-area" id="logoArea">
+        <img class="logo-img" src="webp/Лого.webp" alt="Логотип">
+    </div>
+    <div class="nav-menu">
+        <div class="nav-item" data-action="НАПИТКИ" id="navDrinks">НАПИТКИ</div>
+        <div class="nav-item" data-action="ВКУСЫ" id="navTastes">ВКУСЫ</div>
+        <div class="nav-item" data-action="ДОСТАВКА" id="navDelivery">ДОСТАВКА</div>
+        <a href="merch.html" class="nav-item">МЕРЧ</a>
+    </div>
+    <div class="right-group">
+        <div class="right-group">
+    <!-- Иконка корзины с прямым переходом на cart.html -->
+    <div class="cart-icon" id="cartIcon" onclick="window.location.href='cart.html'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#030405" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1.5"></circle>
+            <circle cx="20" cy="21" r="1.5"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+    </div>
+</div>
+    </div>
+</div>
+
+<!-- ПЕРВАЯ СТРАНИЦА -->
+<section class="page first-page" id="firstPage">
+    <div class="main-content">
+        <div class="background-container">
+            <img class="background-image" src="webp/фон1.webp" alt="Фон">
+            <div class="background-overlay"></div>
+        </div>
+
+        <div class="left-content">
+            <div class="title-block">
+                <div class="main-title">THNDR</div>
+                <div class="subtitle">ЭНЕРГИЯ БЕЗ ТОРМОЗОВ</div>
+                <div class="btn-primary" id="chooseDrinkBtn">
+                    <span>ВЫБРАТЬ НАПИТОК</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <img class="product-image" src="webp/банки 2.webp" alt="Продукт THNDR" id="productImage">
+        </div>
+    </div>
+</section>
+
+<!-- ВТОРАЯ СТРАНИЦА (ВКУСЫ) -->
+<section class="page second-page" id="secondPage">
+    <div class="second-page-container">
+        <div class="second-page-bg"></div>
+        <div class="second-page-overlay"></div>
+        
+        <div class="second-page-title">ВКУСЫ</div>
+        
+        <div class="products-flex">
+            <div class="product-card" data-product="ORIGINAL" data-price="200">
+                <div class="image-container">
+                    <img class="product-img" src="webp/ORIGINAL.webp" alt="ORIGINAL" />
+                    <div class="product-title-overlay">ORIGINAL</div>
+                    <div class="product-price-overlay">150₽</div>
+                    <div class="buy-btn-overlay" data-name="ORIGINAL" data-price="150">КУПИТЬ</div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="ZERO SUGAR" data-price="250">
+                <div class="image-container">
+                    <img class="product-img" src="webp/ZERO SUGAR.webp" alt="ZERO SUGAR" />
+                    <div class="product-title-overlay">ZERO SUGAR</div>
+                    <div class="product-price-overlay">160₽</div>
+                    <div class="buy-btn-overlay" data-name="ZERO SUGAR" data-price="160">КУПИТЬ</div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="TROPICAL" data-price="220">
+                <div class="image-container">
+                    <img class="product-img" src="webp/TROPICAL.webp" alt="TROPICAL" />
+                    <div class="product-title-overlay">TROPICAL</div>
+                    <div class="product-price-overlay">140₽</div>
+                    <div class="buy-btn-overlay" data-name="TROPICAL" data-price="140">КУПИТЬ</div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="BERRY" data-price="250">
+                <div class="image-container">
+                    <img class="product-img" src="webp/BERRY.webp" alt="BERRY" />
+                    <div class="product-title-overlay">BERRY</div>
+                    <div class="product-price-overlay">130₽</div>
+                    <div class="buy-btn-overlay" data-name="BERRY" data-price="130">КУПИТЬ</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-bar"></div>
+        
+        <div class="social-vk">vk</div>
+        <div class="social-telegram">telegram</div>
+        <div class="social-email">@THNDR2026</div>
+    </div>
+</section>
+
+<script src="script.js"></script>
+
+<!-- Обработка перехода с других страниц (скролл к нужному блоку) -->
+<script>
+    (function() {
+        const scrollTo = sessionStorage.getItem('scrollTo');
+        if (scrollTo === 'tastes') {
+            sessionStorage.removeItem('scrollTo');
+            const waitForElement = setInterval(() => {
+                const secondPage = document.getElementById('secondPage');
+                if (secondPage) {
+                    clearInterval(waitForElement);
+                    setTimeout(() => {
+                        secondPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 200);
+                }
+            }, 100);
+            setTimeout(() => {
+                clearInterval(waitForElement);
+            }, 3000);
+       } else if (scrollTo === 'drinks') {
+    sessionStorage.removeItem('scrollTo');
+    // Просто скроллим к началу страницы
+    setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+}
+    })();
+</script>
+</body>
+</html>

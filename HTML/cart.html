@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>THNDR — Корзина | Bootstrap версия</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+<!-- ХЕДЕР -->
+<div class="top-header">
+    <div class="logo-area" onclick="location.href='index.html'">
+        <img class="logo-img" src="webp/Лого.webp" alt="Логотип">
+    </div>
+    <div class="nav-menu">
+        <a href="index.html" class="nav-item">НАПИТКИ</a>
+        <a href="index.html#secondPage" class="nav-item">ВКУСЫ</a>
+        <a href="delivery.html" class="nav-item">ДОСТАВКА</a>
+        <a href="merch.html" class="nav-item">МЕРЧ</a>
+    </div>
+    <div class="right-group">
+        <div class="cart-icon" onclick="location.href='cart.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#030405" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1.5"></circle>
+                <circle cx="20" cy="21" r="1.5"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ -->
+<div class="cart-bg"></div>
+<div class="cart-bg-overlay"></div>
+
+<!-- ПЕРВЫЙ БЛОК: КОРЗИНА -->
+<div class="cart-section">
+    <div class="container">
+        <div class="row row-custom justify-content-center align-items-center">
+            
+            <!-- Левая колонка - ВАША КОРЗИНА -->
+            <div class="col-md-6 col-lg-5">
+                <div class="cart-items-card">
+                    <div class="cart-title">ВАША КОРЗИНА</div>
+                    
+                    <div class="cart-table-header">
+                        <span class="header-name">Напиток</span>
+                        <span class="header-quantity">кол-во</span>
+                        <span class="header-price">цена</span>
+                    </div>
+                    
+                    <div id="cart-items-container">
+                        <!-- Товары будут загружены сюда динамически -->
+                    </div>
+                    
+                    <div id="empty-cart-message" style="text-align: center; padding: 40px; font-size: 24px; color: rgba(0,0,0,0.5); display: none;">
+                        Корзина пуста<br>
+                        Добавьте товары из раздела "ВКУСЫ"
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Правая колонка - ИТОГО -->
+            <div class="col-md-6 col-lg-6">
+                <div class="cart-total-card">
+                    <div class="total-title">ИТОГО</div>
+                    
+                    <div class="total-row">
+                        <span>Товары</span>
+                        <span id="goodsTotal">0р</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Доставка</span>
+                        <span id="deliveryPrice">200р</span>
+                    </div>
+                    <div class="total-amount">
+                        <span>К оплате</span>
+                        <span id="finalTotal">200р</span>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button class="checkout-btn" onclick="scrollToDeliveryForm()">Продолжить оформление</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ВТОРОЙ БЛОК: ДАННЫЕ ДЛЯ ДОСТАВКИ (Bootstrap) -->
+<div class="delivery-data-section" id="deliveryFormSection">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="delivery-data-card">
+                    <h1 class="delivery-data-title">ДАННЫЕ ДЛЯ ДОСТАВКИ</h1>
+                    
+                    <form id="deliveryForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Имя:</label>
+                                <input type="text" class="form-control" placeholder="Введите ваше имя" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Телефон:</label>
+                                <input type="tel" class="form-control" placeholder="+7 (___) ___-__-__" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Адрес:</label>
+                                <input type="text" class="form-control" placeholder="Город, улица, дом, квартира" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Дата:</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Время:</label>
+                                <input type="time" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button type="submit" class="submit-order-btn">ОФОРМИТЬ ЗАКАЗ</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Нижняя полоса -->
+    <div class="bottom-bar"></div>
+    
+    <!-- Социальные кнопки -->
+    <div class="social-vk" onclick="window.open('https://vk.com', '_blank')">vk</div>
+    <div class="social-telegram" onclick="window.open('https://t.me', '_blank')">telegram</div>
+    <div class="social-email" onclick="window.location.href='mailto:support@thndr.ru'">@THNDR2026</div>
+</div>
+
+<script>
+    // ========== КОРЗИНА (РАБОТА С LOCALSTORAGE) ==========
+    const CART_STORAGE_KEY = 'thndr_cart';
+    const DELIVERY_PRICE_KEY = 'thndr_delivery_price';
+    
+    function getCart() {
+        const cart = localStorage.getItem(CART_STORAGE_KEY);
+        return cart ? JSON.parse(cart) : [];
+    }
+    
+    function saveCart(cart) {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    }
+    
+    function getDeliveryPrice() {
+        const price = localStorage.getItem(DELIVERY_PRICE_KEY);
+        return price ? parseInt(price) : 200;
+    }
+    
+    function removeFromCart(productId) {
+        const cart = getCart();
+        const newCart = cart.filter(item => item.id !== productId);
+        saveCart(newCart);
+        renderCart();
+    }
+    
+    function updateQuantity(productId, newQuantity) {
+        if (newQuantity < 1) {
+            removeFromCart(productId);
+            return;
+        }
+        
+        const cart = getCart();
+        const item = cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity = newQuantity;
+            saveCart(cart);
+        }
+        renderCart();
+    }
+    
+    // Рендер корзины
+    function renderCart() {
+        let cart = getCart();
+        
+        cart = cart.filter(item => item.name && item.name !== 'null' && item.name.trim() !== '');
+        saveCart(cart);
+        
+        const container = document.getElementById('cart-items-container');
+        const emptyMessage = document.getElementById('empty-cart-message');
+        
+        if (!container) return;
+        
+        if (cart.length === 0) {
+            container.innerHTML = '';
+            emptyMessage.style.display = 'block';
+            updateTotals();
+            return;
+        }
+        
+        emptyMessage.style.display = 'none';
+        
+        container.innerHTML = cart.map(item => {
+            let priceHtml = `<span class="price-value">${item.price * item.quantity}р</span>`;
+            if (item.discount && item.discount > 0) {
+                const originalTotal = (item.originalPrice || item.price) * item.quantity;
+                priceHtml = `<span class="price-value"><span style="text-decoration: line-through; opacity: 0.6;">${originalTotal}р</span> ${item.price * item.quantity}р</span>`;
+            }
+            
+            return `
+                <div class="cart-item" data-id="${item.id}" data-price="${item.price}">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn minus" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
+                        <span class="quantity-value">${item.quantity}</span>
+                        <button class="quantity-btn plus" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                    </div>
+                    <div class="cart-item-price">
+                        ${priceHtml}
+                        <button class="cart-item-delete" onclick="removeFromCart('${item.id}')">удалить</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        updateTotals();
+    }
+    
+    function updateTotals() {
+        let total = 0;
+        const cart = getCart();
+        
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+        });
+        
+        const delivery = getDeliveryPrice();
+        const finalTotal = total + delivery;
+        
+        document.getElementById('goodsTotal').innerText = total + 'р';
+        document.getElementById('deliveryPrice').innerText = delivery + 'р';
+        document.getElementById('finalTotal').innerText = finalTotal + 'р';
+    }
+    
+    // Прокрутка к форме доставки
+    function scrollToDeliveryForm() {
+        const cart = getCart();
+        if (cart.length === 0) {
+            alert('Корзина пуста! Добавьте товары.');
+            return;
+        }
+        const formSection = document.getElementById('deliveryFormSection');
+        if (formSection) {
+            formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    
+    // Обработка отправки формы
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+        
+        const deliveryForm = document.getElementById('deliveryForm');
+        if (deliveryForm) {
+            deliveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const finalTotal = document.getElementById('finalTotal').innerText;
+                alert(`Спасибо за заказ! Сумма к оплате: ${finalTotal}\nНаш менеджер свяжется с вами для подтверждения.`);
+                localStorage.removeItem(CART_STORAGE_KEY);
+                localStorage.removeItem(DELIVERY_PRICE_KEY);
+                renderCart();
+                deliveryForm.reset();
+            });
+        }
+    });
+    
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,1227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: transparent;
+    overflow-x: hidden;
+}
+
+/* ========== ХЕДЕР ========== */
+.top-header {
+    width: 100%;
+    height: 104px;
+    background: #F9B121;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 291.75px 0 278px;
+    position:static;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo-img {
+    width: 97px;
+    height: 97px;
+    border-radius: 142px;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 150px;
+}
+
+.nav-item {
+    font-size: 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: #030405;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #ffffff;
+}
+
+.nav-item:nth-child(1) {
+    width: 212px;
+    margin-right: 17px;
+}
+.nav-item:nth-child(2) {
+    width: 210px;
+    margin-right: 18px;
+}
+.nav-item:nth-child(3) {
+    width: 218px;
+    margin-right: 60px;
+}
+.nav-item:nth-child(4) {
+    width: 116px;
+}
+
+.right-group {
+    width: 71.25px;
+    height: 83.66px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -70px;
+}
+
+.cart-icon {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+    margin-left: 40px;
+    transform: scale(1.8) translateX(-46px);
+}
+
+.cart-icon:hover svg {
+    filter: brightness(0) invert(1);
+}
+
+.cart-icon svg {
+    width: 100%;
+    height: 100%;
+    transition: filter 0.2s ease;
+}
+/* ========== ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ ========== */
+.cart-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ЗДЕСЬ МЕНЯЙТЕ ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ */
+    background-image: url('webp/фон1.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+.cart-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 4, 5, 0.7);
+    z-index: -1;
+}
+
+/* ========== ПЕРВЫЙ БЛОК: КОРЗИНА ========== */
+.cart-section {
+    background: transparent;
+    min-height: calc(100vh - 107px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+/* Левая карточка - ВАША КОРЗИНА */
+.cart-items-card {
+    background: #F9B121;
+    border-radius: 41px;
+    border: 4px solid #F9B121;
+    padding: 30px 20px;
+    height: 597px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Контейнер для списка товаров с прокруткой */
+#cart-items-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 10px;
+    min-height: 0; /* важно для правильной работы flex + overflow */
+}
+
+/* Стилизация полосы прокрутки */
+#cart-items-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#cart-items-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+#cart-items-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+#cart-items-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Стили для пустой корзины — центрируем по вертикали */
+#empty-cart-message {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+}
+.cart-title {
+    font-size: 48px;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Заголовки таблицы */
+.cart-table-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid black;
+    flex-shrink: 0; 
+}
+
+.header-name {
+    font-size: 35px;
+    font-weight: 500;
+    color: black;
+    text-align: left;
+    width: 50%;
+}
+
+.header-quantity {
+    font-size: 35px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    width: 25%;
+    margin-left: -40px;
+}
+
+.header-price {
+    font-size: 35px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    width: 25%;
+}
+
+/* Строка товара - выравнивание по верхнему краю */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Название напитка - по левому краю, сверху */
+.cart-item-name {
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+    text-align: left;
+    width: 50%;
+    padding-top: 0;
+}
+
+/* Количество - по центру, сверху */
+.cart-item-quantity {
+    font-size: 38px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 0;
+    margin-left: -40px;
+}
+/* Значение количества */
+.quantity-value {
+    min-width: 40px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    position: relative;
+    top: -8px;  /* поднимает только цифру, кнопки остаются */
+}
+
+/* Цена и кнопка - по центру, сверху */
+.cart-item-price {
+    font-size: 40px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 0;
+}
+
+/* Кнопки + и - без обводки */
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 28px;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 -10px;
+    margin-bottom: 15px; 
+}
+
+.quantity-btn:hover {
+    background: rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+/* Значение количества */
+.quantity-value {
+    min-width: 40px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+/* Кнопка удаления */
+.cart-item-delete {
+    width: auto;
+    min-width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0 12px;
+}
+
+.cart-item-delete:hover {
+    background: black;
+    color: #F9B121;
+}
+
+/* Правая карточка - ИТОГО */
+.cart-total-card {
+    background: #F9B121;
+    border-radius: 41px;
+    border: 4px solid #F9B121;
+    padding: 30px 30px;
+    height: 597px;
+    width: 663px;
+}
+
+.total-title {
+    font-size: 48px;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid black;
+}
+
+.total-row span:first-child {
+    font-size: 48px;
+    font-weight: 500;
+    color: black;
+}
+
+.total-row span:last-child {
+    font-size: 48px;
+    font-weight: 500;
+    color: black;
+}
+
+.total-amount {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.total-amount span:first-child {
+    font-size: 48px;
+    font-weight: 500;
+    color: black;
+}
+
+.total-amount span:last-child {
+    font-size: 48px;
+    font-weight: 500;
+    color: black;
+}
+
+.checkout-btn {
+    width: 480px;
+    height: 87px;
+    border-radius: 10px;
+    border: 3px solid black;
+    background: transparent;
+    font-size: 33px;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.checkout-btn:hover {
+    background: black;
+    color: #F9B121;
+}
+
+/* Bootstrap Grid отступы */
+.row-custom {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Стили для пустой корзины */
+#empty-cart-message {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ========== ВТОРОЙ БЛОК: ДАННЫЕ ДЛЯ ДОСТАВКИ ========== */
+
+.delivery-data-section {
+    background: transparent;
+    min-height: 100vh;
+    position: relative;
+    padding: 50px 0 300px 0;
+}
+
+.delivery-data-card {
+    background: #F9B121;
+    border-radius: 20px;
+    padding: 50px 40px;
+    height: 94%;
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.delivery-data-title {
+    text-align: center;
+    color: black;
+    font-size: 60px;
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+/* Стили формы */
+.form-label {
+    font-size: 30px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: -10px;
+}
+
+.form-control {
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid black;
+    border-radius: 0;
+    font-size: 30px;
+    padding: 10px 0;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-control:focus {
+    background: transparent;
+    border-bottom: 3px solid black;
+    box-shadow: none;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 32px;
+}
+
+.submit-order-btn {
+    width: 510px;
+    height: 80px;
+    background: transparent;
+    border-radius: 8px;
+    border: 3px solid black;
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.submit-order-btn:hover {
+    background: black;
+    color: #F9B121;
+}
+
+/* Социальные кнопки для второго блока */
+.delivery-data-section .bottom-bar {
+    width: 100%;
+    height: 105px;
+    background: #F9B121;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.delivery-data-section .social-vk {
+    position: absolute;
+    left: 291px;
+    bottom: 25px;
+    color: black;
+    font-size: clamp(24px, 3vw, 48px);
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
+    left: 14%;
+}
+
+.delivery-data-section .social-telegram {
+    position: absolute;
+    left: 396px;
+    bottom: 25px;
+    color: black;
+    font-size: clamp(24px, 3vw, 48px);
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
+    left: 396px;
+}
+
+.delivery-data-section .social-email {
+    position: absolute;
+    right: 310px;
+    bottom: 25px;
+    color: black;
+    font-size: clamp(24px, 3vw, 48px);
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 2;
+    right: 275px;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+
+/* Планшеты (до 1400px) */
+@media (max-width: 1400px) {
+    .top-header {
+        padding: 0 40px;
+    }
+    
+    .nav-menu {
+        margin-left: 60px;
+    }
+    
+    .nav-item {
+        font-size: 28px;
+    }
+    
+    .nav-item:nth-child(1) { width: 160px; margin-right: 12px; }
+    .nav-item:nth-child(2) { width: 158px; margin-right: 14px; }
+    .nav-item:nth-child(3) { width: 165px; margin-right: 40px; }
+    .nav-item:nth-child(4) { width: 90px; }
+    
+    .cart-items-card, .cart-total-card {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .header-name, .header-quantity, .header-price,
+    .cart-item-name, .cart-item-quantity, .cart-item-price {
+        font-size: 30px;
+    }
+    
+    .quantity-value {
+        font-size: 30px;
+        min-width: 35px;
+    }
+    
+    .quantity-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 24px;
+    }
+    
+    .cart-item-delete {
+        min-width: 85px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .total-row span:first-child,
+    .total-row span:last-child,
+    .total-amount span,
+    .checkout-btn {
+        font-size: 36px;
+    }
+    
+    .checkout-btn {
+        width: 350px;
+        height: 70px;
+    }
+    
+    .row-custom {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    /* Адаптивность второго блока */
+    .delivery-data-card {
+        max-width: 90%;
+        padding: 40px 30px;
+    }
+    .delivery-data-title {
+        font-size: 54px;
+        margin-bottom: 60px;
+    }
+    .form-label {
+        font-size: 36px;
+    }
+    .form-control {
+        font-size: 32px;
+    }
+    .submit-order-btn {
+        width: 400px;
+        height: 70px;
+        font-size: 36px;
+    }
+    .delivery-data-section .social-vk {
+        left: 50px;
+    }
+    .delivery-data-section .social-telegram {
+        left: 150px;
+    }
+    .delivery-data-section .social-email {
+        right: 50px;
+        font-size: 36px;
+    }
+}
+
+/* Планшеты (до 1024px) */
+@media(min-width: 768px) and (max-width: 1024px) {
+    .top-header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .logo-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: -6px;
+        margin-top: -5px;
+    }
+    
+    .nav-menu {
+        margin-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .nav-item {
+        font-size: 35px;
+        width: auto !important;
+        margin-right: 0 !important;
+    }
+    
+    .right-group {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        margin-right: 0;
+    }
+    
+    .cart-icon {
+        width: 45px;
+        height: 45px;
+        transform: scale(1.9) translateX(-27px);
+    }
+    .cart-section .col-md-6,
+    .cart-section .col-lg-5,
+    .cart-section .col-lg-6,
+    .cart-section [class*="col-"] {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+    /* Увеличиваем карточки */
+    .cart-items-card{
+        width: 220%;
+        max-width: auto;
+        min-width: 700px;
+        height: auto;
+        min-height: 600px;
+    }
+    .cart-total-card {
+        width: 220%;
+        max-width: auto;
+        min-width: 700px;
+        height: auto;
+        min-height: 600px;
+    }
+    
+    .row-custom {
+        flex-direction: column;
+        gap: 50px;
+        width: 100%;
+        margin: 0;
+        align-items: center
+    }
+    
+    .cart-title,
+    .total-title {
+        font-size: 50px;
+    }
+    .header-name,
+    .header-quantity,
+    .header-price {
+        font-size: 40px;
+    }
+    
+    .cart-item-name {
+        font-size: 36px;
+    }
+    
+    .cart-item-quantity {
+        font-size: 32px;
+        gap: 4px;
+        margin-left: 0;
+    }
+    
+    .cart-item-price {
+        font-size: 32px;
+    }
+    
+    .quantity-value {
+        font-size: 32px;
+        min-width: 35px;
+        top: -4px;
+    }
+    
+    .quantity-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+        margin: 0;
+    }
+    
+    .cart-item-delete {
+        width: 120px;
+        height: 40px;
+        font-size: 22px;
+        padding: 0 2px 0 2px;
+    }
+    
+    .total-row span:first-child,
+    .total-row span:last-child {
+        font-size: 30px;
+    }
+    
+    .total-amount {
+        font-size: 40px;
+        margin-top: 10px;
+    }
+    
+    .total-amount span {
+        font-size: 30px;
+    }
+    
+    .checkout-btn {
+        width: 320px;
+        height: 140px;
+        font-size: 40px;
+    }
+}
+    /* Адаптивность второго блока */
+    .delivery-data-title {
+        font-size: 50px;
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+    .form-label {
+        font-size: 32px;
+    }
+    .form-control::placeholder {
+        font-size: 22px;
+    }
+    .submit-order-btn {
+        width: 340px;
+        height: 70px;
+        font-size: 30px;
+    }
+    .delivery-data-section .social-vk,
+    .delivery-data-section .social-telegram,
+    .delivery-data-section .social-email {
+        font-size: 28px;
+    }
+    .delivery-data-section .social-vk {
+        left: 20px;
+        bottom: 20px;
+    }
+    .delivery-data-section .social-telegram {
+        left: 100px;
+        bottom: 20px;
+    }
+    .delivery-data-section .social-email {
+        right: 20px;
+        bottom: 20px;
+        font-size: 20px;
+    }
+    .delivery-data-section .bottom-bar {
+        height: 80px;
+    }
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 768px) {
+    .top-header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .logo-img {
+        width: 55px;
+        height: 55px;
+        margin-top: -5px;
+        margin-bottom: -4px;
+    }
+    
+    .nav-menu {
+        margin-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .nav-item {
+        font-size: 20px;
+        line-height: 1.2;
+        width: auto !important;
+        margin-right: 0 !important;
+    }
+    
+    .right-group {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        margin-right: 0;
+    }
+    
+    .cart-icon {
+        width: 32px;
+        height: 32px;
+        transform: scale(1.2) translateX(21px) translateY(-1px);
+        margin-top: 18px;
+        margin-right: 44px;
+    }
+    .cart-section .col-md-6,
+    .cart-section .col-lg-5,
+    .cart-section .col-lg-6,
+    .cart-section [class*="col-"] {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+    .cart-items-card, .cart-total-card {
+        max-width: 95%;
+        padding: 20px;
+    }
+    
+    .cart-title, .total-title {
+        font-size: 32px;
+        
+    }
+    
+    .header-name, .header-quantity, .header-price {
+        font-size: 30px;
+    }
+    
+    .cart-table-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+    
+    .header-name {
+        width: 40%;
+        font-size: 20px;
+        text-align: left;
+        margin-left: 0;
+    }
+    
+    .header-quantity {
+        width: 30%;
+        font-size: 20px;
+        text-align: center;
+        margin-left: 0;
+    }
+    
+    .header-price {
+        width: 30%;
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    /* Строка товара - те же пропорции */
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        flex-wrap: nowrap;
+        margin-bottom: 25px;
+    }
+    
+    .cart-item-name {
+        width: 40%;
+        font-size: 22px;
+        text-align: left;
+        word-break: break-word;
+        padding-right: 10px;
+    }
+    
+    .cart-item-quantity {
+        width: 30%;
+        margin-left: 0;
+        gap: 6px;
+        transform: none;
+        justify-content: center;
+        padding-left: 15px;
+    }
+    
+    .cart-item-price {
+        width: 30%;
+        gap: 5px;
+        justify-content: center;
+        padding-left: 15px;
+    }
+    
+    .quantity-value {
+        font-size: 28px;
+        min-width: 35px;
+        text-align: center;
+        position: static;
+        top: auto;
+    }
+    
+    .quantity-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+        margin: 0;
+    }
+    
+    .price-value {
+        font-size: 22px;
+    }
+    
+    .cart-item-delete {
+        min-width: 70px;
+        height: 32px;
+        font-size: 14px;
+        transform: none;
+    }
+    
+    .total-row span:first-child,
+    .total-row span:last-child {
+        font-size: 25px;
+    }
+    
+    .total-amount {
+        font-size: 30px;
+        margin-top: 10px;
+    }
+    
+    .total-amount span {
+        font-size: 30px !important;
+    }
+    
+    .checkout-btn {
+        width: 300px;
+        height: 120px;
+        font-size: 30px;
+    }
+    
+    /* Адаптивность второго блока */
+    .delivery-data-title {
+        font-size: 32px;
+    }
+    .form-label {
+        font-size: 22px;
+    }
+    .form-control {
+        font-size: 18px;
+    }
+    .form-control::placeholder {
+        font-size: 16px;
+    }
+    .submit-order-btn {
+        width: 260px;
+        height: 50px;
+        font-size: 22px;
+        bottom: 200px;
+        margin-bottom: 60px;
+    }
+    .delivery-data-section .social-vk,
+    .delivery-data-section .social-telegram,
+    .delivery-data-section .social-email {
+        font-size: 28px;
+    }
+}
+
+/* Маленькие мобильные (до 480px) */
+@media (max-width: 480px) {
+    .top-header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .logo-img {
+        width: 60px;
+        height: 60px;
+        margin-top: -5px;
+        margin-bottom: -4px;
+    }
+    
+    .nav-menu {
+        margin-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .nav-item {
+        font-size: 26px;
+        line-height: 1.2;
+        width: auto !important;
+        margin-right: 0 !important;
+    }
+    
+    .right-group {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        margin-right: 0;
+    }
+    
+    .cart-icon {
+        width: 32px;
+        height: 32px;
+        transform: scale(1.2) translateX(21px) translateY(-1px);
+        margin-top: 18px;
+        margin-right: 44px;
+    }
+    
+    /* Уменьшаем заголовки таблицы */
+    .header-name, .header-quantity, .header-price {
+        font-size: 20px;
+    }
+    
+    /* Сохраняем строку таблицы, но делаем компактнее */
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+    }
+    
+    .cart-item-name {
+        font-size: 22px;
+        text-align: left;
+        width: 40%;
+        padding-top: 0;
+        word-break: break-word;
+    }
+    
+    .cart-item-quantity {
+        flex-direction: row;
+        gap: 4px;
+        margin-left: 0;
+        transform: none;
+        width: 30%;
+        transform: translateX(10px);
+    }
+    
+    .cart-item-price {
+        width: 30%;
+        gap: 5px;
+    }
+    
+    .quantity-value {
+        font-size: 20px;
+        min-width: 25px;
+        position: static;
+        top: auto;
+    }
+    
+    .quantity-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 15px;
+        margin: 0;
+    }
+    
+    .cart-item-delete {
+        width: 60px;
+        height: 30px;
+        font-size: 16px;
+        padding: 0 2px 0 2px;
+        transform: translateX(16px);
+    }
+    
+    .price-value {
+        font-size: 20px;
+        transform: translateX(20px) ;
+    }
+    
+    .total-row span:first-child,
+    .total-row span:last-child,
+    .checkout-btn {
+        font-size: 25px;
+    }
+    .total-amount {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;  /* уменьшаем отступ сверху */
+}
+
+.total-amount span:first-child {
+    font-size: 30px; /* "К оплате" - маленький */
+}
+
+.total-amount span:last-child {
+    font-size: 30px;  /* сумма - чуть крупнее */
+}
+    
+    .checkout-btn {
+        width: 200px;
+        height: 90px;
+        font-size: 25px;
+    }
+    
+    .delivery-data-title {
+        font-size: 30px;
+    }
+    .form-label {
+        font-size: 25px;
+    }
+    .form-control {
+        font-size: 25px;
+    }
+    .submit-order-btn {
+        width: 200px;
+        height: 80px;
+        font-size: 24px;
+        transform: translateY(-45px);
+    }
+    .delivery-data-section .social-vk,
+    .delivery-data-section .social-telegram,
+    .delivery-data-section .social-email {
+        font-size: 20px;
+    }
+    .delivery-data-section .social-telegram {
+        left: 70px;
+    }
+    .delivery-data-section .social-email {
+        font-size: 20px;
+    }
+    .delivery-data-section .bottom-bar {
+        height: 70px;
+    }
+}
+
+/* Стили для пустой корзины на мобильных */
+@media (max-width: 768px) {
+    #empty-cart-message {
+        font-size: 18px;
+        padding: 30px 15px;
+    }
+}
