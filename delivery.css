@@ -11,7 +11,7 @@ html, body {
 body {
     font-family: 'Montserrat', sans-serif;
     /* ===== ФОН РАБОТАЕТ ЗДЕСЬ ===== */
-    background-image: url('фон1.png');
+    background-image: url('webp/фон1.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
