@@ -10,7 +10,7 @@ html, body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* ===== ФОН РАБОТАЕТ ЗДЕСЬ ===== */
+    /* ===== ФОН ===== */
     background-image: url('../webp/фон1.webp');
     background-size: cover;
     background-position: center;
@@ -609,7 +609,7 @@ body::before {
     
     .delivery-left {
         height: auto;
-        min-height: auto;
+        min-height: 200px;
         padding: 30px;
     }
     

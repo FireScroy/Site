@@ -21,7 +21,7 @@ body {
     padding: 0;
 }
 
-/* ========== ХЕДЕР (исходное положение + адаптивность) ========== */
+/* ========== ХЕДЕР ========== */
 .top-header {
     width: 100%;
     height: 107px;
@@ -133,7 +133,7 @@ body {
     position: relative;
 }
 
-/* ========== ПЕРВАЯ СТРАНИЦА ========== */
+/* ========== ПЕРВЫЙ БЛОК ========== */
 .first-page {
     display: flex;
     flex-direction: column;
@@ -217,7 +217,7 @@ body {
     margin-top: 20px;
     margin-bottom: 0;
     letter-spacing: normal;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .btn-primary {
@@ -269,7 +269,7 @@ body {
     transform: translateX(-150px);
 }
 
-/* ========== ВТОРАЯ СТРАНИЦА ========== */
+/* ========== ВТОРОЙ БЛОК ========== */
 .second-page-container {
     width: 100%;
     min-height: 100vh;
@@ -963,7 +963,7 @@ body {
     .cart-icon {
         width: 32px;
         height: 32px;
-        transform: scale(1.2) translateX(21px) translateY(-1px);;
+        transform: scale(1.2) translateX(21px) translateY(-1px);
     }
     
     .main-title {
@@ -986,9 +986,8 @@ body {
     .product-image {
         width: 85%;
         height: auto;
-        transform: translateX(0);
+        transform: translateX(0) scale(1.5);
         margin: 0 auto;
-        transform: scale(1.5);
     }
     
     .second-page-container {

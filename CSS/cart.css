@@ -22,7 +22,6 @@ body {
     padding: 0 291.75px 0 278px;
     position:static;
     top: 0;
-    z-index: 100;
 }
 
 .logo-area {
@@ -115,7 +114,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* ЗДЕСЬ МЕНЯЙТЕ ФОН ДЛЯ СТРАНИЦЫ КОРЗИНЫ */
     background-image: url('../webp/фон1.webp');
     background-size: cover;
     background-position: center;
@@ -161,7 +159,7 @@ body {
     overflow-y: auto;
     padding-right: 10px;
     margin-top: 10px;
-    min-height: 0; /* важно для правильной работы flex + overflow */
+    min-height: 0;
 }
 
 /* Стилизация полосы прокрутки */
@@ -183,7 +181,7 @@ body {
     background: rgba(0, 0, 0, 0.5);
 }
 
-/* Стили для пустой корзины — центрируем по вертикали */
+/* Стили для пустой корзины */
 #empty-cart-message {
     text-align: center;
     padding: 40px 20px;
@@ -239,7 +237,7 @@ body {
     width: 25%;
 }
 
-/* Строка товара - выравнивание по верхнему краю */
+/* Строка товара */
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -249,7 +247,7 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* Название напитка - по левому краю, сверху */
+/* Название напитка */
 .cart-item-name {
     font-size: 30px;
     font-weight: 600;
@@ -259,7 +257,7 @@ body {
     padding-top: 0;
 }
 
-/* Количество - по центру, сверху */
+/* Количество */
 .cart-item-quantity {
     font-size: 38px;
     font-weight: 500;
@@ -280,10 +278,10 @@ body {
     font-size: 40px;
     font-weight: 500;
     position: relative;
-    top: -8px;  /* поднимает только цифру, кнопки остаются */
+    top: -8px; 
 }
 
-/* Цена и кнопка - по центру, сверху */
+/* Цена и кнопка */
 .cart-item-price {
     font-size: 40px;
     font-weight: 500;
@@ -297,7 +295,7 @@ body {
     padding-top: 0;
 }
 
-/* Кнопки + и - без обводки */
+/* Кнопки + и - */
 .quantity-btn {
     width: 40px;
     height: 40px;
@@ -545,7 +543,6 @@ body {
     font-weight: 500;
     cursor: pointer;
     z-index: 2;
-    left: 14%;
 }
 
 .delivery-data-section .social-telegram {
@@ -557,12 +554,10 @@ body {
     font-weight: 500;
     cursor: pointer;
     z-index: 2;
-    left: 396px;
 }
 
 .delivery-data-section .social-email {
     position: absolute;
-    right: 310px;
     bottom: 25px;
     color: black;
     font-size: clamp(24px, 3vw, 48px);
@@ -726,14 +721,14 @@ body {
     /* Увеличиваем карточки */
     .cart-items-card{
         width: 220%;
-        max-width: auto;
+        max-width: 1000px;
         min-width: 700px;
         height: auto;
         min-height: 600px;
     }
     .cart-total-card {
         width: 220%;
-        max-width: auto;
+        max-width: 1000px;
         min-width: 700px;
         height: auto;
         min-height: 600px;
@@ -946,7 +941,7 @@ body {
         text-align: center;
     }
     
-    /* Строка товара - те же пропорции */
+    /* Строка товара */
     .cart-item {
         display: flex;
         justify-content: space-between;
@@ -1102,15 +1097,13 @@ body {
     .header-name, .header-quantity, .header-price {
         font-size: 20px;
     }
-    
-    /* Сохраняем строку таблицы, но делаем компактнее */
+
     .cart-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 5px;
         flex-wrap: nowrap;
-        align-items: flex-start;
     }
     
     .cart-item-name {
@@ -1125,7 +1118,6 @@ body {
         flex-direction: row;
         gap: 4px;
         margin-left: 0;
-        transform: none;
         width: 30%;
         transform: translateX(10px);
     }
@@ -1170,15 +1162,15 @@ body {
     .total-amount {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;  /* уменьшаем отступ сверху */
+    margin-top: 20px;
 }
 
 .total-amount span:first-child {
-    font-size: 30px; /* "К оплате" - маленький */
+    font-size: 30px;
 }
 
 .total-amount span:last-child {
-    font-size: 30px;  /* сумма - чуть крупнее */
+    font-size: 30px;
 }
     
     .checkout-btn {

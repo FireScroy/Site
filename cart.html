@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<!-- ВТОРОЙ БЛОК: ДАННЫЕ ДЛЯ ДОСТАВКИ (Bootstrap) -->
+<!-- ВТОРОЙ БЛОК: ДАННЫЕ ДЛЯ ДОСТАВКИ -->
 <div class="delivery-data-section" id="deliveryFormSection">
     <div class="container">
         <div class="row justify-content-center">
@@ -99,41 +99,36 @@
                     <h1 class="delivery-data-title">ДАННЫЕ ДЛЯ ДОСТАВКИ</h1>
                     
                     <form id="deliveryForm">
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Имя:</label>
-                                <input type="text" class="form-control" placeholder="Введите ваше имя" required>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Телефон:</label>
-                                <input type="tel" class="form-control" placeholder="+7 (___) ___-__-__" required>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-12 mb-4">
-                                <label class="form-label">Адрес:</label>
-                                <input type="text" class="form-control" placeholder="Город, улица, дом, квартира" required>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Дата:</label>
-                                <input type="date" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Время:</label>
-                                <input type="time" class="form-control" required>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <button type="submit" class="submit-order-btn">ОФОРМИТЬ ЗАКАЗ</button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <input type="text" aria-label="Имя" class="form-control" placeholder="Введите ваше имя" required>
+        </div>
+        <div class="col-md-6 mb-4">
+            <input type="tel" aria-label="Телефон" class="form-control" placeholder="+7 (___) ___-__-__" required>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 mb-4">
+            <input type="text" aria-label="Адрес" class="form-control" placeholder="Город, улица, дом, квартира" required>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <input type="date" aria-label="Дата" class="form-control" required>
+        </div>
+        <div class="col-md-6 mb-4">
+            <input type="time" aria-label="Время" class="form-control" required>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="submit" class="submit-order-btn">ОФОРМИТЬ ЗАКАЗ</button>
+        </div>
+    </div>
+</form>
                 </div>
             </div>
         </div>
@@ -145,7 +140,7 @@
     <!-- Социальные кнопки -->
     <div class="social-vk" onclick="window.open('https://vk.com', '_blank')">vk</div>
     <div class="social-telegram" onclick="window.open('https://t.me', '_blank')">telegram</div>
-    <div class="social-email" onclick="window.location.href='mailto:support@thndr.ru'">@THNDR2026</div>
+    <div class="social-email" onclick="window.location.href='mailto:support@thndr.ru'">©THNDR2026</div>
 </div>
 
 <script>
