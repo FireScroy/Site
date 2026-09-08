@@ -783,49 +783,108 @@ body {
         height: 100%;
     }
     
-    @media (min-width: 481px) {
-        .products-flex {
-            gap: calc(12px + (20 - 12) * ((100vw - 481px) / (768 - 481)));
-            padding: calc(12px + (20 - 12) * ((100vw - 481px) / (768 - 481)));
-            max-width: calc(350px + (600 - 350) * ((100vw - 481px) / (768 - 481)));
-        }
-        
-        .product-card {
-            width: calc(50% - 10px);
-            min-width: 160px;
-            max-width: 280px;
-            transform: scale(calc(1 + (1.05 - 1) * ((100vw - 481px) / (768 - 481))));
-        }
-        
-        .product-title-overlay {
-            font-size: calc(14px + (18 - 14) * ((100vw - 481px) / (768 - 481)));
-            bottom: calc(45px + (55 - 45) * ((100vw - 481px) / (768 - 481)));
-        }
-        
-        .product-price-overlay {
-            font-size: calc(14px + (18 - 14) * ((100vw - 481px) / (768 - 481)));
-            bottom: calc(12px + (15 - 12) * ((100vw - 481px) / (768 - 481)));
-        }
-        
-        .buy-btn-overlay {
-            font-size: calc(12px + (16 - 12) * ((100vw - 481px) / (768 - 481)));
-            bottom: calc(12px + (15 - 12) * ((100vw - 481px) / (768 - 481)));
-        }
+  @media (min-width: 481px) and (max-width: 575px) {
+    .products-flex {
+        gap: 12px;
+        padding: 12px;
+        max-width: 350px;
     }
-    
-    @media (max-width: 480px) {
-        .products-flex {
-            gap: 12px;
-            padding: 12px;
-            max-width: 350px;
-        }
-        
-        .product-card {
-            width: calc(50% - 6px);
-            min-width: 140px;
-            transform: scale(1);
-        }
-        
+
+    .product-card {
+        width: 50%;
+        min-width: 160px;
+        max-width: 280px;
+        transform: scale(1);
+    }
+
+    .product-title-overlay {
+        font-size: 14px;
+        bottom: 45px;
+    }
+
+    .product-price-overlay {
+        font-size: 14px;
+        bottom: 12px;
+    }
+
+    .buy-btn-overlay {
+        font-size: 12px;
+        bottom: 12px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 667px) {
+    .products-flex {
+        gap: 16px;
+        padding: 16px;
+        max-width: 475px;
+    }
+
+    .product-card {
+        width: 50%;
+        min-width: 160px;
+        max-width: 280px;
+        transform: scale(1.02);
+    }
+
+    .product-title-overlay {
+        font-size: 16px;
+        bottom: 50px;
+    }
+
+    .product-price-overlay {
+        font-size: 16px;
+        bottom: 14px;
+    }
+
+    .buy-btn-overlay {
+        font-size: 14px;
+        bottom: 14px;
+    }
+}
+
+@media (min-width: 668px) and (max-width: 768px) {
+    .products-flex {
+        gap: 20px;
+        padding: 20px;
+        max-width: 600px;
+    }
+
+    .product-card {
+        width: 50%;
+        min-width: 160px;
+        max-width: 280px;
+        transform: scale(1.05);
+    }
+
+    .product-title-overlay {
+        font-size: 18px;
+        bottom: 55px;
+    }
+
+    .product-price-overlay {
+        font-size: 18px;
+        bottom: 15px;
+    }
+
+    .buy-btn-overlay {
+        font-size: 16px;
+        bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-flex {
+        gap: 12px;
+        padding: 12px;
+        max-width: 350px;
+    }
+
+    .product-card {
+        width: 50%;
+        min-width: 140px;
+        transform: scale(1);
+    }
         .product-title-overlay {
             font-size: 14px;
             bottom: 25%;

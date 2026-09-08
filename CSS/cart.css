@@ -134,7 +134,7 @@ body {
 /* ========== ПЕРВЫЙ БЛОК: КОРЗИНА ========== */
 .cart-section {
     background: transparent;
-    min-height: calc(100vh - 107px);
+    min-height: 900px;
     display: flex;
     align-items: center;
     justify-content: center;
